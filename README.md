@@ -62,13 +62,6 @@ docker compose up --build
 Запуск тестов:
 
 ```bash
-uv sync --dev
-uv run pytest tests/ -v
-```
-
-Запуск тестов в Docker:
-
-```bash
 docker compose exec app pytest -v
 ```
 
