@@ -1,6 +1,5 @@
 from functools import lru_cache
 
-from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,16 +16,13 @@ class Settings(BaseSettings):
     kafka_topic_new_order: str = "new_order"
     celery_broker_url: str = "redis://redis:6379/1"
     celery_result_backend: str = "redis://redis:6379/2"
-    cors_origins: list[str] = ["*"]
+    cors_origins: str = "*"
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def split_origins(cls, value: str | list[str]) -> list[str]:
-        if isinstance(value, list):
-            return value
-        if value == "*":
+    @property
+    def cors_origins_list(self) -> list[str]:
+        if self.cors_origins == "*":
             return ["*"]
-        return [origin.strip() for origin in value.split(",") if origin.strip()]
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
 
 
 @lru_cache
