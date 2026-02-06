@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 from redis.asyncio import Redis
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -39,5 +39,5 @@ async def health(
 
     all_ok = all(v == "ok" for v in checks.values())
     status_text = "healthy" if all_ok else "degraded"
-    
+
     return HealthResponse(status=status_text, services=checks)

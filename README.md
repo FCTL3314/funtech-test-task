@@ -66,4 +66,10 @@ uv sync --dev
 uv run pytest tests/ -v
 ```
 
+Запуск тестов в Docker:
+
+```bash
+docker compose exec app pytest -v
+```
+
 Тесты используют моки для БД, Redis и Kafka, поэтому не требуют поднятия инфраструктуры.

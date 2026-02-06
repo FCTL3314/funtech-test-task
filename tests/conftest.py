@@ -2,15 +2,14 @@ from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from fastapi import FastAPI
-from httpx import ASGITransport, AsyncClient
-
 from app.api.routes import auth, health, orders
 from app.core.security import get_current_user, get_password_hash
 from app.db.session import get_db
 from app.models.order import Order, OrderStatus
 from app.models.user import User
 from app.services.cache import get_redis
+from fastapi import FastAPI
+from httpx import ASGITransport, AsyncClient
 
 
 def create_test_app() -> FastAPI:

@@ -9,7 +9,7 @@ ENV PATH="/root/.local/bin:$PATH"
 
 COPY app ./app
 COPY pyproject.toml ./
-RUN uv pip install --system .
+RUN uv pip install --system ".[dev]"
 
 COPY alembic ./alembic
 COPY alembic.ini ./

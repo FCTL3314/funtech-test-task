@@ -12,7 +12,12 @@ async def create_order(
     total_price: float,
 ) -> Order:
     items_dict = [item.model_dump() for item in items]
-    order = Order(user_id=user_id, items=items_dict, total_price=total_price, status=OrderStatus.PENDING)
+    order = Order(
+        user_id=user_id,
+        items=items_dict,
+        total_price=total_price,
+        status=OrderStatus.PENDING,
+    )
     db.add(order)
     await db.commit()
     await db.refresh(order)

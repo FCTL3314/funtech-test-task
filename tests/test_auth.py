@@ -2,7 +2,6 @@ from datetime import datetime, timezone
 from unittest.mock import MagicMock
 
 import pytest
-
 from app.core.security import get_password_hash
 
 

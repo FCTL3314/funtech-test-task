@@ -1,10 +1,9 @@
 import pytest
-from pydantic import ValidationError
-
 from app.models.order import OrderStatus
 from app.schemas.order import OrderCreate, OrderItem, OrderUpdate
 from app.schemas.token import Token
 from app.schemas.user import UserCreate
+from pydantic import ValidationError
 
 
 class TestOrderItem:

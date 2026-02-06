@@ -1,13 +1,12 @@
 from datetime import timedelta
 
-from jose import jwt
-
 from app.core.config import get_settings
 from app.core.security import (
     create_access_token,
     get_password_hash,
     verify_password,
 )
+from jose import jwt
 
 
 class TestPasswordHashing:
@@ -58,7 +57,7 @@ class TestJWT:
         settings = get_settings()
         try:
             jwt.decode("invalid.token.here", settings.secret_key, algorithms=[settings.algorithm])
-            assert False, "Should have raised"
+            raise AssertionError("Should have raised")
         except Exception:
             pass
 
@@ -67,7 +66,7 @@ class TestJWT:
         token = create_access_token("1", expires_delta=timedelta(seconds=-1))
         try:
             jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
-            assert False, "Should have raised"
+            raise AssertionError("Should have raised")
         except Exception:
             pass
 
@@ -75,6 +74,6 @@ class TestJWT:
         token = create_access_token("1")
         try:
             jwt.decode(token, "wrong-secret", algorithms=["HS256"])
-            assert False, "Should have raised"
+            raise AssertionError("Should have raised")
         except Exception:
             pass
